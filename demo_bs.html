@@ -1,0 +1,71 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} calories
+ * @param {number} k
+ * @param {number} lower
+ * @param {number} upper
+ * @return {number}
+ */
+
+/**
+ * @param {string} S
+ * @return {number}
+ */
+/**
+ * @param {string[]} phrases
+ * @return {string[]}
+ */
+var beforeAndAfterPuzzles = function(phrases) {
+  let re = {};
+  let parsedPhrases = phrases.map(item => {
+    if (item.indexOf(' ') < 0) return { l: item, r: item, item };
+    return { l: item.substr(0, item.indexOf(' ')), r: item.substr(item.lastIndexOf(' ') + 1), item };
+  })
+  let set = new Set();
+  let pl = parsedPhrases.length;
+  for (let i = 0; i < pl; i++) {
+    let s = parsedPhrases[i];
+    let p;
+    for (let j = i + 1; j < pl; j++) {
+      p = parsedPhrases[j];
+      if (s.l === p.r) set.add(p.item + s.item.replace(s.l, ''));
+      else if (s.r === p.l) set.add(s.item + p.item.replace(p.l, ''));
+    }
+  }
+  return Array.from(set).sort();
+};
+
+
+function isEq(a, b) {
+  console.log(JSON.stringify(a) == JSON.stringify(b));
+}
+
+let phrases;
+
+phrases = ["writing code", "code rocks"]
+re = beforeAndAfterPuzzles(phrases);
+isEq(re, ["writing code rocks"]);
+
+phrases = ["mission statement",
+  "a quick bite to eat",
+  "a chip off the old block",
+  "chocolate bar",
+  "mission impossible",
+  "a man on a mission",
+  "block party",
+  "eat my words",
+  "bar of soap"
+]
+re = beforeAndAfterPuzzles(phrases);
+isEq(re, ["a chip off the old block party",
+  "a man on a mission impossible",
+  "a man on a mission statement",
+  "a quick bite to eat my words",
+  "chocolate bar of soap"
+]);
+
+
+phrases = ["a", "b", "a"]
+re = beforeAndAfterPuzzles(phrases);
+isEq(re, ["a"]);
+</script>

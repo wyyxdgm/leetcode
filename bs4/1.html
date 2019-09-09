@@ -1,0 +1,37 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} calories
+ * @param {number} k
+ * @param {number} lower
+ * @param {number} upper
+ * @return {number}
+ */
+
+/**
+ * @param {string} S
+ * @return {number}
+ */
+var countLetters = function(S) {
+  let chars = {};
+  let total = []; //k
+  let k = 0;
+  for (let i = 0; i < S.length; i++) {
+    if (total.length - 1 != k) total[k] = 0;
+    total[k] += 1;
+    if (S[i] !== S[i + 1]) k++;
+  }
+  let sum = 0;
+  for (let i = 0; i < total.length; i++) sum += total[i] * (total[i] + 1) / 2;
+  return sum;
+};
+
+let S;
+
+S = "aaaaaaaaaa";
+re = countLetters(S);
+console.log(re === 55)
+
+S = "aaaba"
+re = countLetters(S);
+console.log(re === 8)
+</script>

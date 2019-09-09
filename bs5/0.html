@@ -1,0 +1,45 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} distance
+ * @param {number} start
+ * @param {number} destination
+ * @return {number}
+ */
+var distanceBetweenBusStops = function(distance, start, destination) {
+  if (start > destination) {
+    [start, destination] = [destination, start]
+  }
+  let l = distance.length;
+  let max = start + l;
+  let total1 = 0;
+  let total2 = 0;
+
+  for (let i = start; i < destination; i++) {
+    total1 += distance[i % l];
+  }
+  for (let i = destination; i < max; i++) {
+    total2 += distance[i % l];
+  }
+  return Math.min(total1, total2)
+};
+
+
+function isEq(a, b) {
+  console.log(JSON.stringify(a) == JSON.stringify(b));
+}
+
+distance = [7, 10, 1, 12, 11, 14, 5, 0]
+start = 7
+destination = 2
+re = distanceBetweenBusStops(distance, start, destination);
+isEq(re, 17);
+
+distance = [1, 2, 3, 4], start = 0, destination = 3
+re = distanceBetweenBusStops(distance, start, destination);
+isEq(re, 4);
+
+
+distance = [1, 2, 3, 4], start = 0, destination = 2
+re = distanceBetweenBusStops(distance, start, destination);
+isEq(re, 3);
+</script>
